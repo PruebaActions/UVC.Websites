@@ -1,0 +1,25 @@
+name: Pull Request Pipeline
+
+on:
+  pull_request:
+    branches:
+      - Integration/mainbranch
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+  issues: write
+
+jobs:
+  pr-pipeline:
+    uses: PruebaActions/WorkFlows-Templates/.github/workflows/pr-dotnet-codeql.yaml@main
+    with:
+      image_name: descopesampleapp-pr
+      container_name: descopesampleapp-pr-container
+      dockerfile: ./Dockerfile              # El Dockerfile está en la raíz del proyecto
+      host_port: '8080'                     # Puerto en la máquina host
+      container_port: '80'                  # IIS dentro del contenedor suele usar el 80
+      codeql_languages: 'csharp'
+      project_paths: '["DescopreSampleApp/DescopreSampleApp.csproj"]'
+      has_tests: false                      # ponlo en true si luego agregas un proyecto de pruebas
