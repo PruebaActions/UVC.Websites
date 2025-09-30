@@ -5,7 +5,7 @@ on:
     branches:
       - master
 
-#comentario de prueba
+
 permissions:
   actions: read
   contents: read
