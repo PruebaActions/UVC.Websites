@@ -3,7 +3,7 @@ name: Pull Request Pipeline
 on:
   pull_request:
     branches:
-      - Integration/mainbranch
+      - main
   workflow_dispatch:
 
 permissions:
