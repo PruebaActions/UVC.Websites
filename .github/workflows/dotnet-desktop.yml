@@ -18,7 +18,7 @@ jobs:
     with:
       image_name: descopesampleapp-pr
       container_name: descopesampleapp-pr-container
-      dockerfile: ./Dockerfile              # El Dockerfile está en la raíz del proyecto                    # Puerto en la máquina host
+      dockerfile: ./DescopreSampleApp/Dockerfile              # El Dockerfile está en la raíz del proyecto                    # Puerto en la máquina host
       container_port: '80'                  # IIS dentro del contenedor suele usar el 80
       #codeql_languages: 'csharp'
       project_paths: '["DescopreSampleApp/DescopreSampleApp.csproj"]'
