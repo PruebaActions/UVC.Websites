@@ -9,7 +9,7 @@ COPY ["DescopeSampleApp.sln", "."]
 
 COPY ["DescopeSampleApp/DescopeSampleApp.csproj", "DescopeSampleApp/"]
 
-RUN nuget restore DescopeSampleApp.sln
+RUN nuget restore DescopeSampleApp.sln -PackagesDirectory ./packages
 
 COPY . .
 
