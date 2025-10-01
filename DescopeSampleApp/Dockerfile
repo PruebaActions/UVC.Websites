@@ -12,12 +12,16 @@ RUN nuget restore DescopeSampleApp/DescopeSampleApp.csproj -PackagesDirectory ./
 
 COPY . .
 
-RUN msbuild DescopeSampleApp/DescopeSampleApp.csproj /p:Configuration=Release /p:OutputPath=out
-
+RUN msbuild DescopeSampleApp/DescopeSampleApp.csproj ^
+    /p:Configuration=Release ^
+    /p:DeployOnBuild=true ^
+    /p:PublishProfile=FolderProfile ^
+    /p:PublishDir=c:\out
+    
 FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2022 AS runtime
 
 WORKDIR /inetpub/wwwroot
 
-COPY --from=build /app/DescopeSampleApp/out .
+COPY --from=build C:/out/ .
 
 EXPOSE 80
