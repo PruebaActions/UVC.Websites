@@ -5,8 +5,6 @@ FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS build
 
 WORKDIR /app
 
-COPY ["DescopeSampleApp.sln", "."]
-
 COPY ["DescopeSampleApp/DescopeSampleApp.csproj", "DescopeSampleApp/"]
 COPY ["DescopeSampleApp/packages.config", "DescopeSampleApp/"]
 
