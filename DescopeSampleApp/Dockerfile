@@ -6,7 +6,7 @@ FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS build
 WORKDIR /app
 
 COPY ["DescopeSampleApp/DescopeSampleApp.csproj", "DescopeSampleApp/"]
-#COPY ["DescopeSampleApp/packages.config", "DescopeSampleApp/"]
+COPY ["DescopeSampleApp/packages.config", "DescopeSampleApp/"]
 
 RUN nuget restore DescopeSampleApp/DescopeSampleApp.csproj -PackagesDirectory ./packages
 
