@@ -7,16 +7,16 @@ WORKDIR /app
 
 COPY ["DescopeSampleApp/DescopeSampleApp.csproj", "DescopeSampleApp/"]
 
-RUN dotnet restore DescopeSampleApp/DescopeSampleApp.csproj
+RUN nuget restore DescopeSampleApp.sln
 
 COPY . .
 
-RUN dotnet restore DescopeSampleApp/DescopeSampleApp.csproj -c Release -o out --no-restore
+RUN msbuild DescopeSampleApp/DescopeSampleApp.csproj /p:Configuration=Release /p:OutputPath=out
 
 FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019 AS runtime
 
 WORKDIR /inetpub/wwwroot
 
-COPY --from=build /app/DescopeSampleApp/out ./
+COPY --from=build /app/DescopeSampleApp/out .
 
 EXPOSE 80
