@@ -8,6 +8,7 @@ WORKDIR /app
 COPY ["DescopeSampleApp.sln", "."]
 
 COPY ["DescopeSampleApp/DescopeSampleApp.csproj", "DescopeSampleApp/"]
+COPY ["DescopeSampleApp/packages.config", "DescopeSampleApp/"]
 
 RUN nuget restore DescopeSampleApp/DescopeSampleApp.csproj -PackagesDirectory ./packages
 
