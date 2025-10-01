@@ -5,6 +5,8 @@ FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS build
 
 WORKDIR /app
 
+COPY ["UVC.Old.sln", "."]
+
 COPY ["DescopeSampleApp/DescopeSampleApp.csproj", "DescopeSampleApp/"]
 
 RUN nuget restore DescopeSampleApp.sln
