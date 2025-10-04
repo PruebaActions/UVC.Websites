@@ -11,7 +11,7 @@ permissions:
   contents: read
   security-events: write
   issues: write
-###
+###sadasd
 jobs:
   pr-pipeline:
     uses: PruebaActions/WorkFlows-Templates/.github/workflows/pr-dotnet-codeql.yaml@main
