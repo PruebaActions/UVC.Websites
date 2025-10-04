@@ -19,7 +19,7 @@ jobs:
       has_tests: false
       project_paths: |
         [
-          { "path": "./DescopeSampleApp.sln", "isFramework": "true" },
+          { "path": "./DescopeSampleApp.sln", "isFramework": "true" }
         ]
 
       docker_targets: |
@@ -30,7 +30,7 @@ jobs:
             "dockerfile": "./DescopeSampleApp/Dockerfile",
             "container_port": "80",
             "isFramework": "false"
-          },
+          }
 
 
 
