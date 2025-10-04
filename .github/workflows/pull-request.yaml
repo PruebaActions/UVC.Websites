@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   run-pipeline:
-    uses: GBS-International-Inc/WorkFlows_Templates/.github/workflows/pr-dotnet-codeql-final.yaml@Production
+    uses: PruebaActions/WorkFlows-Templates/.github/workflows/pr-dotnet-codeql-final.yaml@Production
     with:
       codeql_language: "csharp"
       has_tests: false
