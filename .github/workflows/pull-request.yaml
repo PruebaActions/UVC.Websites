@@ -23,4 +23,4 @@ jobs:
       #codeql_languages: 'csharp'
       project_paths: '["./DescopeSampleApp.sln"]'
       has_tests: false                      # ponlo en true si luego agregas un proyecto de pruebas
-      isFramework: true
+      isFramework: false
