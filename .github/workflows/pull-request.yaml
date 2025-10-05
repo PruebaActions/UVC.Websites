@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: 
       - master
-#d dwacas
+#dasczxdwacas
 permissions:
   actions: read
   contents: read
