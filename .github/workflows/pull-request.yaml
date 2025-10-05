@@ -29,7 +29,7 @@ jobs:
             "container_name": "descopesampleapp-pr-container",
             "dockerfile": "./DescopeSampleApp/Dockerfile",
             "container_port": "80",
-            "host_port": "4200"
+            "host_port": "4200",
             "isFramework": "true"
           }
         ]
