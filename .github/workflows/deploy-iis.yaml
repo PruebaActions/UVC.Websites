@@ -45,7 +45,7 @@ jobs:
       # 🔥 Publicación corregida (usa target correcto)
       - name: Publish web project (Web Application)
         run: |
-          Write-Host "🔨 Publishing project to: $env:BUILD_DIR"
+          Write-Host "Publishing project to: $env:BUILD_DIR"
           msbuild $env:WEB_PROJECT_PATH `
             /t:PipelinePreDeployCopyAllFilesToOneFolder `
             /p:_PackageTempDir="$env:BUILD_DIR\" `
