@@ -8,7 +8,8 @@ on:
 jobs:
   build-and-deploy:
     name: Build and Deploy to IIS
-    runs-on: DAST
+    runs-on:
+      group: DAST
 
     env:
       SOLUTION_PATH: 'DescopeSampleApp.sln'             # ✅ Nombre real de la solución
