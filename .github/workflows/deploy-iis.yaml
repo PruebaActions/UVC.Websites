@@ -12,7 +12,7 @@ jobs:
       group: DAST
 
     env:
-      SOLUTION_PATH: 'DescopeSampleApp.sln'             # ✅ Nombre real de la solución
+      SOLUTION_PATH: 'DescopeSampleApp.sln'             # Nombre real de la solución
       WEB_PROJECT_PATH: 'DescopeSampleApp/DescopeSampleApp.csproj' # Ajusta si está en otro subdirectorio
       BUILD_DIR: 'C:\builds\DescopeSampleApp\publish'   # Carpeta temporal de build
       WWWROOT: 'C:\inetpub\wwwroot'                     # Ruta base de IIS
@@ -55,7 +55,7 @@ jobs:
           $deployFolder = "$prefix-#$nextNum"
           $deployPath = Join-Path $env:WWWROOT $deployFolder
 
-          echo "🧩 Deployment folder: $deployFolder"
+          echo "Deployment folder: $deployFolder"
           echo "deploy-folder=$deployFolder" >> $env:GITHUB_OUTPUT
           echo "deploy-path=$deployPath" >> $env:GITHUB_OUTPUT
 
@@ -64,21 +64,21 @@ jobs:
         run: |
           $timestamp = Get-Date -Format "yyyy-MM-dd-HHmmss"
           $backupPath = Join-Path $env:BACKUP_ROOT "UVC.Websites-$timestamp"
-          Write-Host "📦 Creating backup at: $backupPath"
+          Write-Host "Creating backup at: $backupPath"
 
           if (Test-Path $env:WWWROOT) {
             New-Item -ItemType Directory -Force -Path $backupPath | Out-Null
             Copy-Item "$env:WWWROOT\*" $backupPath -Recurse -Force
-            Write-Host "✅ Backup completed."
+            Write-Host "Backup completed."
           } else {
-            Write-Host "⚠️ IIS root not found, skipping backup."
+            Write-Host "IIS root not found, skipping backup."
           }
 
       - name: Deploy to IIS
         shell: powershell
         run: |
           $deployPath = "${{ steps.versioning.outputs.deploy-path }}"
-          Write-Host "🚀 Deploying to $deployPath"
+          Write-Host "Deploying to $deployPath"
 
           # Crear carpeta destino
           if (-Not (Test-Path $deployPath)) {
@@ -87,11 +87,11 @@ jobs:
 
           # Copiar build publicado
           Copy-Item "$env:BUILD_DIR\*" $deployPath -Recurse -Force
-          Write-Host "✅ Deployment completed successfully."
+          Write-Host "Deployment completed successfully."
 
       - name: Restart IIS
         shell: powershell
         run: |
-          Write-Host "🔄 Restarting IIS..."
+          Write-Host "Restarting IIS..."
           iisreset
-          Write-Host "✅ IIS restarted successfully."
+          Write-Host "IIS restarted successfully."
