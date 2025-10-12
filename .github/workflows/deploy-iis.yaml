@@ -37,9 +37,9 @@ jobs:
         run: |
           if (-Not (Test-Path $env:BUILD_DIR)) {
             New-Item -ItemType Directory -Force -Path $env:BUILD_DIR | Out-Null
-            Write-Host "📁 Created folder: $env:BUILD_DIR"
+            Write-Host "Created folder: $env:BUILD_DIR"
           } else {
-            Write-Host "📁 Folder already exists: $env:BUILD_DIR"
+            Write-Host "Folder already exists: $env:BUILD_DIR"
           }
 
       # 🔥 Publicación corregida (usa target correcto)
@@ -56,10 +56,10 @@ jobs:
         shell: powershell
         run: |
           if (-Not (Test-Path $env:BUILD_DIR)) {
-            Write-Host "❌ Publish folder not found: $env:BUILD_DIR"
+            Write-Host "Publish folder not found: $env:BUILD_DIR"
             exit 1
           } else {
-            Write-Host "✅ Publish folder created successfully: $env:BUILD_DIR"
+            Write-Host "Publish folder created successfully: $env:BUILD_DIR"
             Get-ChildItem $env:BUILD_DIR
           }
 
@@ -97,23 +97,23 @@ jobs:
           if (Test-Path $env:WWWROOT) {
             New-Item -ItemType Directory -Force -Path $backupPath | Out-Null
             Copy-Item "$env:WWWROOT\*" $backupPath -Recurse -Force
-            Write-Host "✅ Backup completed."
+            Write-Host "Backup completed."
           } else {
-            Write-Host "⚠️ IIS root not found, skipping backup."
+            Write-Host "IIS root not found, skipping backup."
           }
 
       - name: Deploy to IIS
         shell: powershell
         run: |
           $deployPath = "${{ steps.versioning.outputs.deploy-path }}"
-          Write-Host "🚀 Deploying to $deployPath"
+          Write-Host "Deploying to $deployPath"
 
           if (-Not (Test-Path $deployPath)) {
             New-Item -ItemType Directory -Force -Path $deployPath | Out-Null
           }
 
           Copy-Item "$env:BUILD_DIR\*" $deployPath -Recurse -Force
-          Write-Host "✅ Deployment completed successfully."
+          Write-Host "Deployment completed successfully."
 
       - name: Update IIS site to latest deployment
         shell: powershell
@@ -123,14 +123,14 @@ jobs:
           if ($latest) {
             Set-ItemProperty "IIS:\Sites\Default Web Site" -Name physicalPath -Value $latest.FullName
             Restart-WebAppPool "DefaultAppPool"
-            Write-Host "✅ IIS now points to $($latest.FullName)"
+            Write-Host "IIS now points to $($latest.FullName)"
           } else {
-            Write-Host "⚠️ No deployment folder found in wwwroot."
+            Write-Host "No deployment folder found in wwwroot."
           }
 
       - name: Restart IIS
         shell: powershell
         run: |
-          Write-Host "♻️ Restarting IIS..."
+          Write-Host "Restarting IIS..."
           iisreset
-          Write-Host "✅ IIS restarted successfully."
+          Write-Host "IIS restarted successfully."
