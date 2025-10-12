@@ -1,0 +1,96 @@
+name: Deploy to IIS (.NET Framework 4.8)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy to IIS
+    runs-on: [self-hosted, windows]
+
+    env:
+      SOLUTION_PATH: 'DescopeSampleApp.sln'             # ✅ Nombre real de la solución
+      WEB_PROJECT_PATH: 'DescopeSampleApp/DescopeSampleApp.csproj' # Ajusta si está en otro subdirectorio
+      BUILD_DIR: 'C:\builds\DescopeSampleApp\publish'   # Carpeta temporal de build
+      WWWROOT: 'C:\inetpub\wwwroot'                     # Ruta base de IIS
+      BACKUP_ROOT: 'C:\inetpub\wwwroot\backups'         # Carpeta base de backups
+      SITE_PREFIX: 'UVC.Websites'                       # Prefijo de nombre del sitio
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Restore NuGet packages
+        run: nuget restore $env:SOLUTION_PATH
+
+      - name: Build full solution (Release)
+        run: msbuild $env:SOLUTION_PATH /p:Configuration=Release
+
+      - name: Publish web project
+        run: msbuild $env:WEB_PROJECT_PATH /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:PublishDir=$env:BUILD_DIR /p:Configuration=Release
+
+      - name: Determine next deployment folder
+        id: versioning
+        shell: powershell
+        run: |
+          $date = Get-Date -Format "yyyy-MM-dd"
+          $prefix = "$env:SITE_PREFIX-$date"
+          $existing = Get-ChildItem -Path $env:WWWROOT -Directory | Where-Object { $_.Name -like "$prefix-*" }
+          
+          if ($existing) {
+            $maxNum = ($existing.Name | ForEach-Object {
+              if ($_ -match "$prefix-#(\d+)$") { [int]$matches[1] }
+            } | Measure-Object -Maximum).Maximum
+            $nextNum = $maxNum + 1
+          } else {
+            $nextNum = 1
+          }
+
+          $deployFolder = "$prefix-#$nextNum"
+          $deployPath = Join-Path $env:WWWROOT $deployFolder
+
+          echo "🧩 Deployment folder: $deployFolder"
+          echo "deploy-folder=$deployFolder" >> $env:GITHUB_OUTPUT
+          echo "deploy-path=$deployPath" >> $env:GITHUB_OUTPUT
+
+      - name: Backup current IIS websites
+        shell: powershell
+        run: |
+          $timestamp = Get-Date -Format "yyyy-MM-dd-HHmmss"
+          $backupPath = Join-Path $env:BACKUP_ROOT "UVC.Websites-$timestamp"
+          Write-Host "📦 Creating backup at: $backupPath"
+
+          if (Test-Path $env:WWWROOT) {
+            New-Item -ItemType Directory -Force -Path $backupPath | Out-Null
+            Copy-Item "$env:WWWROOT\*" $backupPath -Recurse -Force
+            Write-Host "✅ Backup completed."
+          } else {
+            Write-Host "⚠️ IIS root not found, skipping backup."
+          }
+
+      - name: Deploy to IIS
+        shell: powershell
+        run: |
+          $deployPath = "${{ steps.versioning.outputs.deploy-path }}"
+          Write-Host "🚀 Deploying to $deployPath"
+
+          # Crear carpeta destino
+          if (-Not (Test-Path $deployPath)) {
+            New-Item -ItemType Directory -Force -Path $deployPath | Out-Null
+          }
+
+          # Copiar build publicado
+          Copy-Item "$env:BUILD_DIR\*" $deployPath -Recurse -Force
+          Write-Host "✅ Deployment completed successfully."
+
+      - name: Restart IIS
+        shell: powershell
+        run: |
+          Write-Host "🔄 Restarting IIS..."
+          iisreset
+          Write-Host "✅ IIS restarted successfully."
