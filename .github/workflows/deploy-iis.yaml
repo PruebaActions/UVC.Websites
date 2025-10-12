@@ -33,7 +33,7 @@ jobs:
         run: msbuild $env:SOLUTION_PATH /p:Configuration=Release
 
       - name: Publish web project
-        run: msbuild $env:WEB_PROJECT_PATH /p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:PublishDir=$env:BUILD_DIR /p:Configuration=Release
+        run: msbuild $env:WEB_PROJECT_PATH /p:DeployOnBuild=true /p:WebPublishMethod=FileSystem /p:PublishDir=$env:BUILD_DIR /p:Configuration=Release
 
       - name: Determine next deployment folder
         id: versioning
