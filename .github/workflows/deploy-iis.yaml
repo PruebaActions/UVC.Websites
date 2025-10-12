@@ -32,6 +32,16 @@ jobs:
       - name: Build full solution (Release)
         run: msbuild $env:SOLUTION_PATH /p:Configuration=Release
 
+      - name: Ensure build directory exists
+        shell: powershell
+        run: |
+          if (-Not (Test-Path "C:\builds\DescopeSampleApp\publish")) {
+            New-Item -ItemType Directory -Force -Path "C:\builds\DescopeSampleApp\publish" | Out-Null
+            Write-Host "Created folder: C:\builds\DescopeSampleApp\publish"
+          } else {
+            Write-Host "Folder already exists: C:\builds\DescopeSampleApp\publish"
+          }
+
       - name: Publish web project
         run: msbuild $env:WEB_PROJECT_PATH /p:DeployOnBuild=true /p:WebPublishMethod=FileSystem /p:PublishDir=$env:BUILD_DIR /p:Configuration=Release
 
