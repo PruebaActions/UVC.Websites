@@ -1,9 +1,8 @@
 name: CI - Multi Project Pipeline
 
 on:
-  pull_request:
-    branches: 
-      - master
+  repository_dispatch:
+    types: [run-pr-template]
   workflow_dispatch:
 #dsasdsad
 permissions:
