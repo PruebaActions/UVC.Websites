@@ -1,16 +1,18 @@
 name: CI - Multi Project Pipeline
 
 on:
+  repository_dispatch:
+    types: [run-pr-template]
+    
   pull_request:
     branches: 
       - master
-  repository_dispatch:
-    types: [run-pr-template]
-  workflow_dispatch:
+
+
 #ddsfeafaads
 permissions:
-  actions: read
-  contents: read
+  actions: write
+  contents: write
   security-events: write
   issues: write
 ##asddsad
