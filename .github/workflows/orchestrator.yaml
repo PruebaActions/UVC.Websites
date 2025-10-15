@@ -1,0 +1,43 @@
+name: CI Orchestrator - UVC Websites & APIs
+
+on:
+  pull_request:
+    branches: [ master ]
+  repository_dispatch:
+    types: [run-orchestrator]
+
+jobs:
+  orchestrate:
+    runs-on:
+      group: DAST
+
+    if: github.event_name != 'repository_dispatch' || github.event.client_payload.source_repo != github.repository
+
+    steps:
+      - name: Trigger PR workflow (UVC.Websites)
+        uses: PruebaActions/WorkFlows-Templates/.github/actions/dispatch@main
+        with:
+          token: ${{ secrets.REPO_TOKEN }}
+          repository: PruebaActions/UVC.Websites
+          event_type: run-pr-template
+          client-payload: |
+            {
+              "source_repo": "${{ github.repository }}",
+              "sha": "${{ github.sha }}",
+              "pr_number": "${{ github.event.pull_request.number }}",
+              "branch": "${{ github.head_ref }}"
+            }
+
+      - name: Trigger PR workflow (Website)
+        uses: PruebaActions/WorkFlows-Templates/.github/actions/dispatch@main
+        with:
+          token: ${{ secrets.REPO_TOKEN }}
+          repository: PruebaActions/Website
+          event_type: run-pr-template
+          client-payload: |
+            {
+              "source_repo": "${{ github.repository }}",
+              "sha": "${{ github.sha }}",
+              "pr_number": "${{ github.event.pull_request.number }}",
+              "branch": "${{ github.head_ref }}"
+            }
