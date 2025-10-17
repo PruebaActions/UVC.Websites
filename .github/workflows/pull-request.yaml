@@ -1,8 +1,6 @@
 name: CI - Multi Project Pipeline
 
 on:
-  repository_dispatch:
-    types: [run-pr-template]
   pull_request:
     branches: 
       - master
