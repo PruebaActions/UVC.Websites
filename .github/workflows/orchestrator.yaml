@@ -1,8 +1,7 @@
 name: CI Orchestrator - UVC Websites & APIs
 
 on:
-  pull_request:
-    branches: [ master ]
+
   repository_dispatch:
     types: [run-orchestrator]
 #debug sasdsfddsa
