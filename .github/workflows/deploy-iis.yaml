@@ -13,6 +13,7 @@ jobs:
       solution_path: "./DescopeSampleApp.sln"
       iis_site_name: "UVCApp"
       iis_root_path: "C:\\inetpub\\wwwroot"
+      framework_type: "netframework"
       has_sql_scripts: false
       sql_scripts_branch: "sql-changes"
       sql_connection_string: "Server=localhost;Trusted_Connection=True;"
