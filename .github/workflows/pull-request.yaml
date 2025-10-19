@@ -15,7 +15,7 @@ permissions:
 ##asddsad
 jobs:
   run-pipeline:
-    uses: PruebaActions/WorkFlows-Templates/.github/workflows/pr-updated@main
+    uses: PruebaActions/WorkFlows-Templates/.github/workflows/pr-updated.yaml@main
     with:
       project_paths: |
         [
