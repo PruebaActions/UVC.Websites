@@ -17,13 +17,14 @@ jobs:
   run-pipeline:
     uses: PruebaActions/WorkFlows-Templates/.github/workflows/pr-dotnet-codeql-final.yaml@main
     with:
-      codeql_language: "csharp"
-      has_tests: false
       project_paths: |
         [
           { "path": "./DescopeSampleApp.sln", "isFramework": "true" }
         ]
-
+      test_paths: '[]'
+      codeql_languages: 'csharp'
+      solution_path_codeql: './DescopeSampleApp.sln'
+      solution_isFramework_codeql: 'true'
       docker_targets: |
         [
           {
