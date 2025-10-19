@@ -19,7 +19,7 @@ jobs:
     with:
       project_paths: |
         [
-          { "path": "./DescopeSampleApp.sln", "isFramework": "true" }
+          { "path": "./DescopeSampleApp.sln", "isFramework": "true", "language": "csharp" }
         ]
       test_paths: '[]'
       codeql_languages: 'csharp'
