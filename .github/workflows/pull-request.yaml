@@ -5,32 +5,37 @@ on:
     branches: 
       - master
 
+
 permissions:
-  actions: read
-  contents: read
+  actions: write
+  contents: write
   security-events: write
   issues: write
-
+##asddsad
 jobs:
-  run-pipeline:
-    uses: GBS-International-Inc/WorkFlows_Templates/.github/workflows/pull-request-pipeline.yml@Production
+  pr-pipeline:
+    uses: PruebaActions/WorkFlows-Templates/.github/workflows/pr-dotnet-codeql.yaml@main
     with:
-      codeql_language: "csharp"
-      has_tests: false
-      project_paths: |
-        [
-          { "path": "./DescopeSampleApp.sln", "isFramework": true },
-        ]
-
-      docker_targets: |
-        [
-          {
-            "image_name": "descopesampleapp-pr",
-            "container_name": "descopesampleapp-pr-container",
-            "dockerfile": "./DescopeSampleApp/Dockerfile",
-            "container_port": "80",
-            "isFramework": false
-          },
+      project_path: "./DescopeSampleApp/DescopeSampleApp.csproj"
+      solution_path: "./DescopeSampleApp.sln"
+      #     project_paths: |
+      #   [
+      #     { "path": "./DescopeSampleApp.sln", "isFramework": "true", "language": "csharp" }
+      #   ]
+      # test_paths: '[]'
+      # codeql_languages: 'csharp'
+      # solution_path_codeql: './DescopeSampleApp.sln'
+      # solution_isFramework_codeql: 'true'
+      # docker_targets: |
+      #   [
+      #     {
+      #       "image_name": "descopesampleapp-pr",
+      #       "container_name": "descopesampleapp-pr-container",
+      #       "dockerfile": "./DescopeSampleApp/Dockerfile",
+      #       "container_port": "80",
+      #       "isFramework": "true"
+      #     }
+      #   ]
 
 
 
