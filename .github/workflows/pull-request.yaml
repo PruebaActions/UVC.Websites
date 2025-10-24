@@ -14,7 +14,7 @@ permissions:
 ##asddsad
 jobs:
   pr-pipeline:
-    uses: PruebaActions/WorkFlows-Templates/.github/workflows/pr-dotnet-codeql.yaml@main
+    uses: PruebaActions/WorkFlows-Templates/.github/workflows/artifact.yaml@main
     with:
       project_path: "./DescopeSampleApp/DescopeSampleApp.csproj"
       solution_path: "./DescopeSampleApp.sln"
