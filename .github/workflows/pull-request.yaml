@@ -6,7 +6,6 @@ on:
       - master
 
 
-#dsasdsadas
 permissions:
   actions: write
   contents: write
@@ -14,7 +13,7 @@ permissions:
   issues: write
 ##asddsad
 jobs:
-  run-pipeline:
+  pr-pipeline:
     uses: PruebaActions/WorkFlows-Templates/.github/workflows/artifact.yaml@main
     with:
       project_path: "./DescopeSampleApp/DescopeSampleApp.csproj"
