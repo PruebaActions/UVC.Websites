@@ -15,26 +15,27 @@ permissions:
 ##asddsad
 jobs:
   run-pipeline:
-    uses: PruebaActions/WorkFlows-Templates/.github/workflows/pr-updated.yaml@main
+    uses: PruebaActions/WorkFlows-Templates/.github/workflows/artifact.yaml@main
     with:
-      project_paths: |
-        [
-          { "path": "./DescopeSampleApp.sln", "isFramework": "true", "language": "csharp" }
-        ]
-      test_paths: '[]'
-      codeql_languages: 'csharp'
-      solution_path_codeql: './DescopeSampleApp.sln'
-      solution_isFramework_codeql: 'true'
-      docker_targets: |
-        [
-          {
-            "image_name": "descopesampleapp-pr",
-            "container_name": "descopesampleapp-pr-container",
-            "dockerfile": "./DescopeSampleApp/Dockerfile",
-            "container_port": "80",
-            "isFramework": "true"
-          }
-        ]
+      project_path: "./DescopeSampleApp/DescopeSampleApp.csproj"
+      #     project_paths: |
+      #   [
+      #     { "path": "./DescopeSampleApp.sln", "isFramework": "true", "language": "csharp" }
+      #   ]
+      # test_paths: '[]'
+      # codeql_languages: 'csharp'
+      # solution_path_codeql: './DescopeSampleApp.sln'
+      # solution_isFramework_codeql: 'true'
+      # docker_targets: |
+      #   [
+      #     {
+      #       "image_name": "descopesampleapp-pr",
+      #       "container_name": "descopesampleapp-pr-container",
+      #       "dockerfile": "./DescopeSampleApp/Dockerfile",
+      #       "container_port": "80",
+      #       "isFramework": "true"
+      #     }
+      #   ]
 
 
 
