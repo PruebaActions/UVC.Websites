@@ -18,6 +18,7 @@ jobs:
     uses: PruebaActions/WorkFlows-Templates/.github/workflows/artifact.yaml@main
     with:
       project_path: "./DescopeSampleApp/DescopeSampleApp.csproj"
+      solution_path: "./DescopeSampleApp.sln"
       #     project_paths: |
       #   [
       #     { "path": "./DescopeSampleApp.sln", "isFramework": "true", "language": "csharp" }
