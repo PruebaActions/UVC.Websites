@@ -1,40 +1,42 @@
 name: CI - Multi Project Pipeline
 
 on:
-  repository_dispatch:
-    types: [run-pr-template]
   pull_request:
     branches: 
       - master
-  workflow_dispatch:
-#dsasdsad
+
+
+#dsasdsadas
 permissions:
-  actions: read
-  contents: read
+  actions: write
+  contents: write
   security-events: write
   issues: write
-##asddsadsafgsdhxbfgdvxcbfnv 
+##asddsad
 jobs:
   run-pipeline:
-    uses: PruebaActions/WorkFlows-Templates/.github/workflows/pr-dotnet-codeql-final.yaml@main
+    uses: PruebaActions/WorkFlows-Templates/.github/workflows/artifact.yaml@main
     with:
-      codeql_language: "csharp"
-      has_tests: false
-      project_paths: |
-        [
-          { "path": "./DescopeSampleApp.sln", "isFramework": "true" }
-        ]
-
-      docker_targets: |
-        [
-          {
-            "image_name": "descopesampleapp-pr",
-            "container_name": "descopesampleapp-pr-container",
-            "dockerfile": "./DescopeSampleApp/Dockerfile",
-            "container_port": "80",
-            "isFramework": "true"
-          }
-        ]
+      project_path: "./DescopeSampleApp/DescopeSampleApp.csproj"
+      solution_path: "./DescopeSampleApp.sln"
+      #     project_paths: |
+      #   [
+      #     { "path": "./DescopeSampleApp.sln", "isFramework": "true", "language": "csharp" }
+      #   ]
+      # test_paths: '[]'
+      # codeql_languages: 'csharp'
+      # solution_path_codeql: './DescopeSampleApp.sln'
+      # solution_isFramework_codeql: 'true'
+      # docker_targets: |
+      #   [
+      #     {
+      #       "image_name": "descopesampleapp-pr",
+      #       "container_name": "descopesampleapp-pr-container",
+      #       "dockerfile": "./DescopeSampleApp/Dockerfile",
+      #       "container_port": "80",
+      #       "isFramework": "true"
+      #     }
+      #   ]
 
 
 
