@@ -18,6 +18,7 @@ jobs:
     with:
       project_path: "./DescopeSampleApp/DescopeSampleApp.csproj"
       solution_path: "./DescopeSampleApp.sln"
+      project_type: "framework"
       #     project_paths: |
       #   [
       #     { "path": "./DescopeSampleApp.sln", "isFramework": "true", "language": "csharp" }
