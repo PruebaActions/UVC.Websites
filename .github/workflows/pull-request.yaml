@@ -23,7 +23,7 @@ jobs:
             "solution_path": "./DescopeSampleApp.sln",
             "project_path": "./DescopeSampleApp/DescopeSampleApp.csproj",
             "project_type": "framework",
-            "deploy_target_path": "C:\\inetpub\\ftproot\\Websites\\UnlimitedVacationClub\\B2C\\Forms.Owin-2025-10-27-2"
+            "deploy_target_path": "C:\\inetpub\\wwwroot\\artifact"
           }
         ]
       }'
