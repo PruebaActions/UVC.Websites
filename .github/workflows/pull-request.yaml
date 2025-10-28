@@ -16,7 +16,7 @@ jobs:
   pr-pipeline:
     uses: PruebaActions/WorkFlows-Templates/.github/workflows/probando-local.yaml@main
     with:
-      project_json: '{
+      projects_json: '{
         "include": [
           {
             "project_name": "UVC.Web",
