@@ -14,11 +14,32 @@ permissions:
 ##asddsadasdasdsadsa
 jobs:
   pr-pipeline:
-    uses: PruebaActions/WorkFlows-Templates/.github/workflows/artifact.yaml@main
+    uses: PruebaActions/WorkFlows-Templates/.github/workflows/probando-local.yaml@main
     with:
-      project_path: "./DescopeSampleApp/DescopeSampleApp.csproj"
-      solution_path: "./DescopeSampleApp.sln"
-      project_type: "framework"
+      project_json: '{
+        "include": [
+          {
+            "project_name": "UVC.Web",
+            "solution_path": "./DescopeSampleApp.sln",
+            "project_path": "./DescopeSampleApp/DescopeSampleApp.csproj",
+            "project_type": "framework",
+            "deploy_target_path": "C:\\inetpub\\ftproot\\Websites\\UnlimitedVacationClub\\B2C\\Forms.Owin-2025-10-27-2"
+          }
+        ]
+      }'
+
+      runner_tag: '["self-hosted", "windows", "x64", "iis"]'
+
+
+
+    
+      #project_path: "./DescopeSampleApp/DescopeSampleApp.csproj"
+      #solution_path: "./DescopeSampleApp.sln"
+      #project_type: "framework"
+
+
+
+      
       #     project_paths: |
       #   [
       #     { "path": "./DescopeSampleApp.sln", "isFramework": "true", "language": "csharp" }
