@@ -28,7 +28,7 @@ jobs:
         ]
       }'
 
-      runner_tag: '["self-hosted", "windows", "x64", "iis"]'
+      runner_tag: '["self-hosted", "windows", "x64", "laptop"]'
 
 
 
