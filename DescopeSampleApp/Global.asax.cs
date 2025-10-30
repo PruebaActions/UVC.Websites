@@ -20,6 +20,7 @@ namespace DescopeSampleApp
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            DescopeSampleApp.DllLockTest.StartLock();
         }
     }
 }
