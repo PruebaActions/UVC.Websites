@@ -6,19 +6,52 @@ on:
       - master
 
 
-#dsasdsadas
 permissions:
   actions: write
   contents: write
   security-events: write
   issues: write
-##asddsad
+##uhsssasdsadsa
 jobs:
-  run-pipeline:
-    uses: PruebaActions/WorkFlows-Templates/.github/workflows/artifact.yaml@main
+  pr-pipeline:
+    uses: PruebaActions/WorkFlows-Templates/.github/workflows/probando-local.yaml@main
     with:
-      project_path: "./DescopeSampleApp/DescopeSampleApp.csproj"
-      solution_path: "./DescopeSampleApp.sln"
+      projects_json: '{
+        "include": [
+          {
+            "project_name": "UVC.Web",
+            "solution_path": "./DescopeSampleApp.sln",
+            "project_path": "./DescopeSampleApp/DescopeSampleApp.csproj",
+            "project_type": "framework",
+            "deploy_testing_path": "asdadsadsa",
+            "deploy_target_path": "C:\\Prueba\\UVC.Live"
+          }
+        ]
+      }'
+
+      skip_items_json: |
+        [
+          "web.config",
+          "Areas"
+        ]
+
+      runner_tag: '["self-hosted", "windows", "x64", "laptop"]'
+
+      e2e_tests_json: |
+        [
+          "dotnet restore ./klk/Website.sln"
+        ]
+
+
+
+    
+      #project_path: "./DescopeSampleApp/DescopeSampleApp.csproj"
+      #solution_path: "./DescopeSampleApp.sln"
+      #project_type: "framework"
+
+
+
+      
       #     project_paths: |
       #   [
       #     { "path": "./DescopeSampleApp.sln", "isFramework": "true", "language": "csharp" }
