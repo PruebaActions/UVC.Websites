@@ -11,7 +11,7 @@ permissions:
   contents: write
   security-events: write
   issues: write
-##uhsaasasdasdsa
+##uhssadsadsadsa
 jobs:
   pr-pipeline:
     uses: PruebaActions/WorkFlows-Templates/.github/workflows/probando-local.yaml@main
