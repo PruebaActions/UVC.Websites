@@ -28,6 +28,13 @@ jobs:
         ]
       }'
 
+      skip_items_json: |
+        [
+          "web.config",
+          "Areas",
+          "Logs"
+        ]
+
       runner_tag: '["self-hosted", "windows", "x64", "laptop"]'
 
       e2e_tests_json: |
