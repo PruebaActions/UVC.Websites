@@ -1,9 +1,9 @@
 name: CI - Multi Project Pipeline
 
 on:
-  pull_request:
+  push:
     branches: 
-      - master
+      - Development
 
 
 permissions:
@@ -23,7 +23,6 @@ jobs:
             "solution_path": "./DescopeSampleApp.sln",
             "project_path": "./DescopeSampleApp/DescopeSampleApp.csproj",
             "project_type": "framework",
-            "deploy_testing_path": "asdadsadsa",
             "deploy_target_path": "C:\\Prueba\\UVC.Live"
           }
         ]
@@ -36,11 +35,6 @@ jobs:
         ]
 
       runner_tag: '["self-hosted", "windows", "x64", "laptop"]'
-
-      e2e_tests_json: |
-        [
-          "dotnet restore ./klk/Website.sln"
-        ]
 
 
 
