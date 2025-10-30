@@ -31,8 +31,7 @@ jobs:
       skip_items_json: |
         [
           "web.config",
-          "Areas",
-          "Logs"
+          "Areas"
         ]
 
       runner_tag: '["self-hosted", "windows", "x64", "laptop"]'
