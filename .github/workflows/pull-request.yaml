@@ -23,7 +23,7 @@ jobs:
             "solution_path": "./DescopeSampleApp.sln",
             "project_path": "./DescopeSampleApp/DescopeSampleApp.csproj",
             "project_type": "framework",
-            "deploy_target_path": "C:\\Prueba"
+            "deploy_target_path": "C:\\Prueba\\UVC.Live"
           }
         ]
       }'
