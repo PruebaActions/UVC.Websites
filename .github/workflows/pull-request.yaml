@@ -39,7 +39,7 @@ jobs:
 
       e2e_tests_json: |
         [
-          "dotnet restore ./klk/Website.sln"
+          "dotnet restore ./DescopeSampleApp.sln"
         ]
 
 
