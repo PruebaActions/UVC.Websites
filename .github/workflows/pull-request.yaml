@@ -14,7 +14,7 @@ permissions:
 ##uhsasdsadsa
 jobs:
   pr-pipeline:
-    uses: PruebaActions/WorkFlows-Templates/.github/workflows/probando-local.yaml@main
+    uses: PruebaActions/WorkFlows-Templates/.github/workflows/utilizando-composite.yaml@main
     with:
       projects_json: '{
         "include": [
