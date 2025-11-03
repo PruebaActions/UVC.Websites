@@ -4,9 +4,9 @@ on:
   push:
     branches: 
       - Development
-    paths:
-      - DescopeSampleApp/Views/**
-      - DescopeSampleApp/Controllers/**
+    # paths:
+    #   - DescopeSampleApp/Views/**
+    #   - DescopeSampleApp/Controllers/**
 
 
 permissions:
@@ -16,49 +16,49 @@ permissions:
   issues: write
 ##uhsasdsadsa
 jobs:
-  check-changes:
-    runs-on: windows-latest  # Usamos Windows ya que PowerShell es el estándar en Windows
+  # check-changes:
+  #   runs-on: windows-latest  # Usamos Windows ya que PowerShell es el estándar en Windows
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
 
-      - name: Check for changes in both directories
-        id: check_changes
-        shell: pwsh  # Indica que el script debe ejecutarse en PowerShell
-        run: |
-          # Asegúrate de obtener los commits correctos
-          $commitBefore = "${{ github.event.before }}"
-          $commitCurrent = "${{ github.sha }}"
+  #     - name: Check for changes in both directories
+  #       id: check_changes
+  #       shell: pwsh  # Indica que el script debe ejecutarse en PowerShell
+  #       run: |
+  #         # Asegúrate de obtener los commits correctos
+  #         $commitBefore = "${{ github.event.before }}"
+  #         $commitCurrent = "${{ github.sha }}"
 
-          # Verifica si los commits son válidos
-          if (-not $commitBefore -or -not $commitCurrent) {
-            Write-Host "Invalid commit references. Exiting job."
-            exit 1
-          }
+  #         # Verifica si los commits son válidos
+  #         if (-not $commitBefore -or -not $commitCurrent) {
+  #           Write-Host "Invalid commit references. Exiting job."
+  #           exit 1
+  #         }
 
-          Write-Host "Checking differences between commits $commitBefore and $commitCurrent..."
+  #         Write-Host "Checking differences between commits $commitBefore and $commitCurrent..."
 
-          # Obtén los cambios entre el commit actual y el commit anterior
-          $changesApi = git diff --name-only $commitBefore $commitCurrent | Where-Object { $_ -like 'DescopeSampleApp/Views/*' }
-          $changesWebsite = git diff --name-only $commitBefore $commitCurrent | Where-Object { $_ -like 'DescopeSampleApp/Controllers/*' }
+  #         # Obtén los cambios entre el commit actual y el commit anterior
+  #         $changesApi = git diff --name-only $commitBefore $commitCurrent | Where-Object { $_ -like 'DescopeSampleApp/Views/*' }
+  #         $changesWebsite = git diff --name-only $commitBefore $commitCurrent | Where-Object { $_ -like 'DescopeSampleApp/Controllers/*' }
 
-          Write-Host "API changes: $changesApi"
-          Write-Host "Website changes: $changesWebsite"
+  #         Write-Host "API changes: $changesApi"
+  #         Write-Host "Website changes: $changesWebsite"
 
-          # Verifica si ambos directorios tienen cambios
-          if (-not $changesApi -or -not $changesWebsite) {
-            Write-Host "Not both directories have changes. Exiting job."
-            exit 1  # Sale sin ejecutar el resto del flujo si uno de los directorios no tiene cambios
-          } else {
-            Write-Host "Both directories have changes. Continuing job."
-            exit 0
-          }
+  #         # Verifica si ambos directorios tienen cambios
+  #         if (-not $changesApi -or -not $changesWebsite) {
+  #           Write-Host "Not both directories have changes. Exiting job."
+  #           exit 1  # Sale sin ejecutar el resto del flujo si uno de los directorios no tiene cambios
+  #         } else {
+  #           Write-Host "Both directories have changes. Continuing job."
+  #           exit 0
+  #         }
       
   
   pr-pipeline:
-    needs: check-changes
-    if: success()
+    #needs: check-changes
+    #if: success()
     uses: PruebaActions/WorkFlows-Templates/.github/workflows/utilizando-composite.yaml@main
     with:
       projects_json: '{
@@ -68,7 +68,8 @@ jobs:
             "solution_path": "./DescopeSampleApp.sln",
             "project_path": "./DescopeSampleApp/DescopeSampleApp.csproj",
             "project_type": "framework",
-            "deploy_target_path": "C:\\Prueba\\UVC.Live"
+            "deploy_target_path": "C:\\Prueba\\UVC.Live".
+            "skip_deploy": "true"
           }
         ]
       }'
