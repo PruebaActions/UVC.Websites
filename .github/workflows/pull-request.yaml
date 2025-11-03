@@ -37,7 +37,9 @@ jobs:
           # Verifica si ambos directorios tienen cambios
           if (-not $changesApi -or -not $changesWebsite) {
             Write-Host "Not both directories have changes. Exiting job."
-            exit 0  # Sale sin ejecutar el resto del flujo si uno de los directorios no tiene cambios
+            exit 1  # Sale sin ejecutar el resto del flujo si uno de los directorios no tiene cambios
+          }else {
+            exit 0
           }
   
   pr-pipeline:
