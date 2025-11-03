@@ -6,6 +6,7 @@ on:
       - Development
     paths:
       - DescopeSampleApp/Views/**
+      - DescopeSampleApp/Controllers/**
 
 
 permissions:
