@@ -27,15 +27,17 @@ jobs:
         id: check_changes
         shell: pwsh  # Indica que el script debe ejecutarse en PowerShell
         run: |
-          # Obtener el commit anterior y el actual usando git rev-parse
-          $commitBefore = git rev-parse ${{ github.event.before }}
-          $commitCurrent = git rev-parse ${{ github.sha }}
+          # Asegúrate de obtener los commits correctos
+          $commitBefore = "${{ github.event.before }}"
+          $commitCurrent = "${{ github.sha }}"
 
           # Verifica si los commits son válidos
           if (-not $commitBefore -or -not $commitCurrent) {
-            Write-Host "Invalid commits. Exiting job."
+            Write-Host "Invalid commit references. Exiting job."
             exit 1
           }
+
+          Write-Host "Checking differences between commits $commitBefore and $commitCurrent..."
 
           # Obtén los cambios entre el commit actual y el commit anterior
           $changesApi = git diff --name-only $commitBefore $commitCurrent | Where-Object { $_ -like 'DescopeSampleApp/Views/*' }
@@ -52,6 +54,7 @@ jobs:
             Write-Host "Both directories have changes. Continuing job."
             exit 0
           }
+      
   
   pr-pipeline:
     needs: check-changes
