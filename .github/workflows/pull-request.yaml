@@ -16,7 +16,33 @@ permissions:
   issues: write
 ##uhsasdsadsa
 jobs:
+  check-changes:
+    runs-on: windows-latest  # Usamos Windows ya que PowerShell es el estándar en Windows
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check for changes in both directories
+        id: check_changes
+        shell: pwsh  # Indica que el script debe ejecutarse en PowerShell
+        run: |
+          # Obtén los cambios entre el commit actual y el commit anterior
+          $changesApi = git diff --name-only ${{ github.event.before }} ${{ github.sha }} | Where-Object { $_ -like 'DescopeSampleApp/Views/**' }
+          $changesWebsite = git diff --name-only ${{ github.event.before }} ${{ github.sha }} | Where-Object { $_ -like 'DescopeSampleApp/Controllers/**' }
+
+          Write-Host "API changes: $changesApi"
+          Write-Host "Website changes: $changesWebsite"
+
+          # Verifica si ambos directorios tienen cambios
+          if (-not $changesApi -or -not $changesWebsite) {
+            Write-Host "Not both directories have changes. Exiting job."
+            exit 0  # Sale sin ejecutar el resto del flujo si uno de los directorios no tiene cambios
+          }
+  
   pr-pipeline:
+    needs: check-changes
+    if: success()
     uses: PruebaActions/WorkFlows-Templates/.github/workflows/utilizando-composite.yaml@main
     with:
       projects_json: '{
