@@ -72,6 +72,11 @@ jobs:
       run: |
         Write-Host "🏗 Building solution:"
         msbuild ./DescopeSampleApp/DescopeSampleApp.csproj /p:Configuration=Release
+  check:
+    name: checking out
+    runs-on: [self-hosted, windows, x64, laptop]
+    steps:  
+    - uses: actions/checkout@v4
     # #needs: check-changes
     # #if: success()
     # uses: PruebaActions/WorkFlows-Templates/.github/workflows/utilizando-composite.yaml@main
