@@ -73,22 +73,33 @@ jobs:
         Write-Host "🏗 Building solution:"
         msbuild ./DescopeSampleApp/DescopeSampleApp.csproj /p:Configuration=Release
 
-    - name: "Upload artifact"
-      uses: actions/upload-artifact@v4
-      with:
-        name: UVC.Websites
-        path: ${{ github.workspace }}/Release
-  codeql:
-    name: analysis
-    runs-on: [self-hosted, windows, x64, laptop]
-    steps:  
-    - uses: actions/checkout@v4
+  #   - name: "Upload artifact"
+  #     uses: actions/upload-artifact@v4
+  #     with:
+  #       name: UVC.Websites
+  #       path: ${{ github.workspace }}/Release
+  # codeql:
+  #   name: analysis
+  #   runs-on: [self-hosted, windows, x64, laptop]
+  #   steps:  
+  #   - uses: actions/checkout@v4
 
-    - name: "Download artifact"
-      uses: actions/download-artifact@v4
-      with:
-        name: UVC.Websites
-        path: ${{ github.workspace }}/Release
+  #   - name: "Download artifact"
+  #     uses: actions/download-artifact@v4
+  #     with:
+  #       name: UVC.Websites
+  #       path: ${{ github.workspace }}/Release
+    
+  #   - name: 🔍 Initialize CodeQL
+  #     uses: github/codeql-action/init@v3
+  #     with:
+  #       languages: csharp
+  #       build-mode: none
+  #       queries: security-and-quality
+    
+  #   - name: 🧠 Run CodeQL Analysis
+  #     uses: github/codeql-action/analyze@v3
+    
 
     # #needs: check-changes
     # #if: success()
