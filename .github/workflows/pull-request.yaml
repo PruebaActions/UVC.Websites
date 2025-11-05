@@ -85,13 +85,13 @@ jobs:
     name: analysis
     runs-on: [self-hosted, windows, x64, laptop]
     steps:  
-    - uses: actions/checkout@v4
+    # - uses: actions/checkout@v4
 
-    - name: "Download artifact"
-      uses: actions/download-artifact@v4
-      with:
-        name: UVC.Websites
-        path: ${{ github.workspace }}/Release
+    # - name: "Download artifact"
+    #   uses: actions/download-artifact@v4
+    #   with:
+    #     name: UVC.Websites
+    #     path: ${{ github.workspace }}/Release
     
     - name: 🔍 Initialize CodeQL
       uses: github/codeql-action/init@v3
