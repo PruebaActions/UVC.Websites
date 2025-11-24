@@ -24,7 +24,7 @@ jobs:
   
   testing:
     runs-on: windows-latest
-    if: ${{ needs.detect-changes.outputs.all_changed == 'true' }}
+    if: ${{ needs.check-changes.outputs.all_changed == 'true' }}
     steps:
       - name: Run tests
         shell: pwsh
