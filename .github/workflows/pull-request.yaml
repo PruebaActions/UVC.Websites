@@ -16,15 +16,15 @@ permissions:
   issues: write
 ##asfdadfadsaads
 jobs:
-  # check-changes:
-  #   name: Check Changes
-  #   uses: PruebaActions/WorkFlows-Templates/.github/workflows/detect-changes.yaml@main
-  #   with:
-  #     paths: '["DescopeSampleApp/Views/**","DescopeSampleApp/Controllers/**"]'
+  check-changes:
+    name: Check Changes
+    uses: PruebaActions/WorkFlows-Templates/.github/workflows/detect-changes.yaml@main
+    with:
+      paths: '["DescopeSampleApp/Views/**","DescopeSampleApp/Controllers/**"]'
   
   testing:
     runs-on: windows-latest
-    #if: ${{ needs.detect_changes.outputs.all_changed == 'true' }}
+    if: ${{ needs.detect-changes.outputs.all_changed == 'true' }}
     steps:
       - name: Run tests
         shell: pwsh

@@ -1,174 +1,174 @@
-name: CI - Multi Project Pipeline
-
-on:
-  push:
-    branches: 
-      - Development
-    paths:
-      - DescopeSampleApp/Controllers/**
-
-
-permissions:
-  actions: write
-  contents: write
-  security-events: write
-  issues: write
-##asfdadfadsaads
-jobs:
-  # check-changes:
-  #   name: Check Changes
-  #   uses: PruebaActions/WorkFlows-Templates/.github/workflows/detect-changes.yaml@main
-  #   with:
-  #     paths: '["DescopeSampleApp/Views/**","DescopeSampleApp/Controllers/**"]'
-  
-  testing:
-    runs-on: windows-latest
-    #if: ${{ needs.detect_changes.outputs.all_changed == 'true' }}
-    steps:
-      - name: Run tests
-        shell: pwsh
-        run: |
-          Write-Host "Running tests..."
-          start-sleep -s 10
-      
-  
-  # pr-pipeline:
-  #   name: Building
-  #   runs-on: [self-hosted, windows, x64, laptop]
-  #   steps:  
-  #   - uses: actions/checkout@v4
-  #   - name: Restore NuGet packages
-  #     shell: powershell
-  #     run: |
-  #       Write-Host "🔄 Restoring NuGet packages for:"
-  #       nuget restore ./DescopeSampleApp.sln
-
-  #   - name: Build the app with MSBuild
-  #     shell: powershell
-  #     run: |
-  #       Write-Host "🏗 Building solution:"
-  #       msbuild ./DescopeSampleApp/DescopeSampleApp.csproj /p:Configuration=Release
-
-  #   - name: "Upload artifact"
-  #     uses: actions/upload-artifact@v4
-  #     with:
-  #       name: UVC.Websites
-  #       path: |
-  #         **/bin/**
-  #         **/Release/**
-  #         !**/obj/**
-  # codeql:
-  #   name: analysis
-  #   runs-on: [self-hosted, windows, x64, laptop]
-  #   steps:  
-  #   # - uses: actions/checkout@v4
-
-  #   # - name: "Download artifact"
-  #   #   uses: actions/download-artifact@v4
-  #   #   with:
-  #   #     name: UVC.Websites
-  #   #     path: ${{ github.workspace }}/Release
-    
-  #   - name: 🔍 Initialize CodeQL
-  #     uses: github/codeql-action/init@v3
-  #     with:
-  #       languages: csharp
-  #       build-mode: none
-  #       queries: security-and-quality
-    
-  #   - name: 🧠 Run CodeQL Analysis
-  #     uses: github/codeql-action/analyze@v3
-    
-
-    # #needs: check-changes
-    # #if: success()
-    # uses: PruebaActions/WorkFlows-Templates/.github/workflows/utilizando-composite.yaml@main
-    # with:
-    #   projects_json: '{
-    #     "include": [
-    #       {
-    #         "project_name": "UVC.Web",
-    #         "solution_path": "./DescopeSampleApp.sln",
-    #         "project_path": "./DescopeSampleApp/DescopeSampleApp.csproj",
-    #         "project_type": "framework",
-    #         "deploy_target_path": "C:\\Prueba\\UVC.Live".
-    #         "skip_deploy": "true"
-    #       }
-    #     ]
-    #   }'
-
-    #   skip_items_json: |
-    #     [
-    #       "web.config",
-    #       "Areas"
-    #     ]
-
-    #   runner_tag: '["self-hosted", "windows", "x64", "laptop"]'
-
-    #   e2e_tests_json: |
-    #     [
-    #       ""
-    #     ]
-
-    #   e2e_smoke_tests_json: |
-    #     [
-    #       ""
-    #     ]
-
-
-
-    
-      #project_path: "./DescopeSampleApp/DescopeSampleApp.csproj"
-      #solution_path: "./DescopeSampleApp.sln"
-      #project_type: "framework"
-
-
-
-      
-      #     project_paths: |
-      #   [
-      #     { "path": "./DescopeSampleApp.sln", "isFramework": "true", "language": "csharp" }
-      #   ]
-      # test_paths: '[]'
-      # codeql_languages: 'csharp'
-      # solution_path_codeql: './DescopeSampleApp.sln'
-      # solution_isFramework_codeql: 'true'
-      # docker_targets: |
-      #   [
-      #     {
-      #       "image_name": "descopesampleapp-pr",
-      #       "container_name": "descopesampleapp-pr-container",
-      #       "dockerfile": "./DescopeSampleApp/Dockerfile",
-      #       "container_port": "80",
-      #       "isFramework": "true"
-      #     }
-      #   ]
-
-
-
-
-# name: Pull Request Pipeline
+# name: CI - Multi Project Pipeline
 
 # on:
-#   pull_request:
-#     branches:
-#       - master
+#   push:
+#     branches: 
+#       - Development
+#     paths:
+#       - DescopeSampleApp/Controllers/**
 
 
 # permissions:
-#   actions: read
-#   contents: read
+#   actions: write
+#   contents: write
 #   security-events: write
 #   issues: write
-
+# ##asfdadfadsaads
 # jobs:
-#   pr-pipeline:
-#     uses: PruebaActions/WorkFlows-Templates/.github/workflows/pr-dotnet-codeql.yaml@main
-#     with:
-#       image_name: descopesampleapp-pr
-#       container_name: descopesampleapp-pr-container
-#       dockerfile: ./DescopeSampleApp/Dockerfile              # El Dockerfile está en la raíz del proyecto                    # Puerto en la máquina host
-#       container_port: '80'                  # IIS dentro del contenedor suele usar el 80
-#       #codeql_languages: 'csharp'
-#       project_paths: '["./DescopeSampleApp.sln"]'
-#       has_tests: false                      # ponlo en true si luego agregas un proyecto de pruebas
+#   # check-changes:
+#   #   name: Check Changes
+#   #   uses: PruebaActions/WorkFlows-Templates/.github/workflows/detect-changes.yaml@main
+#   #   with:
+#   #     paths: '["DescopeSampleApp/Views/**","DescopeSampleApp/Controllers/**"]'
+  
+#   testing:
+#     runs-on: windows-latest
+#     #if: ${{ needs.detect_changes.outputs.all_changed == 'true' }}
+#     steps:
+#       - name: Run tests
+#         shell: pwsh
+#         run: |
+#           Write-Host "Running tests..."
+#           start-sleep -s 10
+      
+  
+#   # pr-pipeline:
+#   #   name: Building
+#   #   runs-on: [self-hosted, windows, x64, laptop]
+#   #   steps:  
+#   #   - uses: actions/checkout@v4
+#   #   - name: Restore NuGet packages
+#   #     shell: powershell
+#   #     run: |
+#   #       Write-Host "🔄 Restoring NuGet packages for:"
+#   #       nuget restore ./DescopeSampleApp.sln
+
+#   #   - name: Build the app with MSBuild
+#   #     shell: powershell
+#   #     run: |
+#   #       Write-Host "🏗 Building solution:"
+#   #       msbuild ./DescopeSampleApp/DescopeSampleApp.csproj /p:Configuration=Release
+
+#   #   - name: "Upload artifact"
+#   #     uses: actions/upload-artifact@v4
+#   #     with:
+#   #       name: UVC.Websites
+#   #       path: |
+#   #         **/bin/**
+#   #         **/Release/**
+#   #         !**/obj/**
+#   # codeql:
+#   #   name: analysis
+#   #   runs-on: [self-hosted, windows, x64, laptop]
+#   #   steps:  
+#   #   # - uses: actions/checkout@v4
+
+#   #   # - name: "Download artifact"
+#   #   #   uses: actions/download-artifact@v4
+#   #   #   with:
+#   #   #     name: UVC.Websites
+#   #   #     path: ${{ github.workspace }}/Release
+    
+#   #   - name: 🔍 Initialize CodeQL
+#   #     uses: github/codeql-action/init@v3
+#   #     with:
+#   #       languages: csharp
+#   #       build-mode: none
+#   #       queries: security-and-quality
+    
+#   #   - name: 🧠 Run CodeQL Analysis
+#   #     uses: github/codeql-action/analyze@v3
+    
+
+#     # #needs: check-changes
+#     # #if: success()
+#     # uses: PruebaActions/WorkFlows-Templates/.github/workflows/utilizando-composite.yaml@main
+#     # with:
+#     #   projects_json: '{
+#     #     "include": [
+#     #       {
+#     #         "project_name": "UVC.Web",
+#     #         "solution_path": "./DescopeSampleApp.sln",
+#     #         "project_path": "./DescopeSampleApp/DescopeSampleApp.csproj",
+#     #         "project_type": "framework",
+#     #         "deploy_target_path": "C:\\Prueba\\UVC.Live".
+#     #         "skip_deploy": "true"
+#     #       }
+#     #     ]
+#     #   }'
+
+#     #   skip_items_json: |
+#     #     [
+#     #       "web.config",
+#     #       "Areas"
+#     #     ]
+
+#     #   runner_tag: '["self-hosted", "windows", "x64", "laptop"]'
+
+#     #   e2e_tests_json: |
+#     #     [
+#     #       ""
+#     #     ]
+
+#     #   e2e_smoke_tests_json: |
+#     #     [
+#     #       ""
+#     #     ]
+
+
+
+    
+#       #project_path: "./DescopeSampleApp/DescopeSampleApp.csproj"
+#       #solution_path: "./DescopeSampleApp.sln"
+#       #project_type: "framework"
+
+
+
+      
+#       #     project_paths: |
+#       #   [
+#       #     { "path": "./DescopeSampleApp.sln", "isFramework": "true", "language": "csharp" }
+#       #   ]
+#       # test_paths: '[]'
+#       # codeql_languages: 'csharp'
+#       # solution_path_codeql: './DescopeSampleApp.sln'
+#       # solution_isFramework_codeql: 'true'
+#       # docker_targets: |
+#       #   [
+#       #     {
+#       #       "image_name": "descopesampleapp-pr",
+#       #       "container_name": "descopesampleapp-pr-container",
+#       #       "dockerfile": "./DescopeSampleApp/Dockerfile",
+#       #       "container_port": "80",
+#       #       "isFramework": "true"
+#       #     }
+#       #   ]
+
+
+
+
+# # name: Pull Request Pipeline
+
+# # on:
+# #   pull_request:
+# #     branches:
+# #       - master
+
+
+# # permissions:
+# #   actions: read
+# #   contents: read
+# #   security-events: write
+# #   issues: write
+
+# # jobs:
+# #   pr-pipeline:
+# #     uses: PruebaActions/WorkFlows-Templates/.github/workflows/pr-dotnet-codeql.yaml@main
+# #     with:
+# #       image_name: descopesampleapp-pr
+# #       container_name: descopesampleapp-pr-container
+# #       dockerfile: ./DescopeSampleApp/Dockerfile              # El Dockerfile está en la raíz del proyecto                    # Puerto en la máquina host
+# #       container_port: '80'                  # IIS dentro del contenedor suele usar el 80
+# #       #codeql_languages: 'csharp'
+# #       project_paths: '["./DescopeSampleApp.sln"]'
+# #       has_tests: false                      # ponlo en true si luego agregas un proyecto de pruebas
