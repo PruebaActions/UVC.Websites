@@ -4,9 +4,9 @@ on:
   push:
     branches: 
       - Development
-    paths:
-      - DescopeSampleApp/Views/**
-      - DescopeSampleApp/Controllers/**
+    # paths:
+    #   - DescopeSampleApp/Views/**
+    #   - DescopeSampleApp/Controllers/**
 
 
 permissions:
