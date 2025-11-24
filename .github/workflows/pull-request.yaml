@@ -20,7 +20,7 @@ jobs:
     name: Check Changes
     uses: PruebaActions/WorkFlows-Templates/.github/workflows/detect-changes.yaml@main
     with:
-      paths: |
+      paths_to_check: |
         [
           "DescopeSampleApp/Views/",
           "DescopeSampleApp/Controllers/"
