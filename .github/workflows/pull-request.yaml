@@ -4,8 +4,8 @@ on:
   push:
     branches: 
       - Development
-    paths:
-      - DescopeSampleApp/Views/**
+    # paths:
+    #   - DescopeSampleApp/Views/**
 
 
 
