@@ -5,8 +5,7 @@ on:
     branches: 
       - Development
     paths:
-      - DescopeSampleApp/Views/**
-
+      - DescopeSampleApp/Controllers/**
 
 
 permissions:
