@@ -17,43 +17,14 @@ permissions:
 ##asfdadfadsaads
 jobs:
   check-changes:
-    runs-on: windows-latest  # Usamos Windows ya que PowerShell es el estándar en Windows
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Check for changes in both directories
-        id: check_changes
-        shell: pwsh  # Indica que el script debe ejecutarse en PowerShell
-        run: |
-          # Asegúrate de obtener los commits correctos
-          $commitBefore = "${{ github.event.before }}"
-          $commitCurrent = "${{ github.sha }}"
-
-          # Verifica si los commits son válidos
-          if (-not $commitBefore -or -not $commitCurrent) {
-            Write-Host "Invalid commit references. Exiting job."
-            exit 1
-          }
-
-          Write-Host "Checking differences between commits $commitBefore and $commitCurrent..."
-
-          # Obtén los cambios entre el commit actual y el commit anterior
-          $changesApi = git diff --name-only $commitBefore $commitCurrent | Where-Object { $_ -like 'DescopeSampleApp/Views/*' }
-          $changesWebsite = git diff --name-only $commitBefore $commitCurrent | Where-Object { $_ -like 'DescopeSampleApp/Controllers/*' }
-
-          Write-Host "API changes: $changesApi"
-          Write-Host "Website changes: $changesWebsite"
-
-          # Verifica si ambos directorios tienen cambios
-          if (-not $changesApi -or -not $changesWebsite) {
-            Write-Host "Not both directories have changes. Exiting job."
-            exit 1  # Sale sin ejecutar el resto del flujo si uno de los directorios no tiene cambios
-          } else {
-            Write-Host "Both directories have changes. Continuing job."
-            exit 0
-          }
+    name: Check Changes
+    uses: PruebaActions/WorkFlows-Templates/.github/workflows/check-changes.yaml@main
+    with:
+      paths: |
+        [
+          "DescopeSampleApp/Views/",
+          "DescopeSampleApp/Controllers/"
+        ]
   
   testing:
     runs-on: windows-latest
