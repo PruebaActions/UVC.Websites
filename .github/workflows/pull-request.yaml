@@ -56,6 +56,15 @@ jobs:
             Write-Host "Both directories have changes. Continuing job."
             exit 0
           }
+  
+  testing:
+    runs-on: windows-latest
+    needs: check-changes
+    steps:
+      - name: Run tests
+        shell: pwsh
+        run: |
+          Write-Host "Running tests..."
       
   
   # pr-pipeline:
