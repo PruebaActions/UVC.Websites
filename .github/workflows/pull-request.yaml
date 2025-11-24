@@ -18,7 +18,7 @@ permissions:
 jobs:
   check-changes:
     name: Check Changes
-    uses: PruebaActions/WorkFlows-Templates/.github/workflows/check-changes.yaml@main
+    uses: PruebaActions/WorkFlows-Templates/.github/workflows/detect-changes.yaml@main
     with:
       paths: |
         [
