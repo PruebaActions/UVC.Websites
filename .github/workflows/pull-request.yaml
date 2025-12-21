@@ -1,12 +1,12 @@
 name: CI - Multi Project Pipeline
 
 on:
-  workflow-dispatch:
   push:
     branches: 
       - Development
     # paths:
     #   - DescopeSampleApp/Views/**
+  workflow_dispatch:
 
 
 
