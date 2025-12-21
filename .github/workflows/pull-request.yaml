@@ -1,6 +1,7 @@
 name: CI - Multi Project Pipeline
 
 on:
+  workflow-dispatch:
   push:
     branches: 
       - Development
